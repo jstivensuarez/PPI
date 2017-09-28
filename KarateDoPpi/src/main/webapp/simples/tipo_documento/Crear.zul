@@ -1,0 +1,55 @@
+<zk>
+	<window apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('co.com.controller.TipoDocumentoVM')"
+		validationMessages="@id('vmsgs')" position="center">
+
+
+		<separator />
+
+		<div>
+
+			<label value="Descripción" width="150px" />
+			<textbox value="@bind(vm.descripcion)" width="150px"
+				tabindex="1" />
+			<button label="Crear" onClick="@command('crear')"
+				width="100px" height="30px" />
+		</div>
+		<separator />
+		<grid id="demoGrid"
+			model="@load(vm.documentos) @template((each.estado) ? 'editable' : 'noneditable')" mold="paging" pageSize="6">
+			<columns>
+				<column>Tipo de documento</column>
+			</columns>
+			<template name="editable">
+				<row>
+					<textbox
+						value="@load(each.descripcion) @save(each.descripcion, before='confirm')" />
+					<div>
+						<button label="Confirmar"
+							onClick="@command('confirm', documento=each)" />
+						<space bar="true" />
+						<button label="Cancelar"
+							onClick="@command('cambiarStatus', documento=each)" />
+					</div>
+				</row>
+			</template>
+			<template name="noneditable">
+				<row>
+
+					<label value="@load(each.descripcion)" />
+					<hbox>
+						<button label="Editar"
+							onClick="@command('cambiarStatus', documento=each)" />
+						<space bar="true" />
+						<button label="Eliminar"
+							onClick="@command('eliminar', documento=each)" />
+					</hbox>
+
+				</row>
+			</template>
+		</grid>
+		<div style="display-top:10px">
+			<label value="@load(vm.mensaje)" />
+		</div>
+	</window>
+</zk>
