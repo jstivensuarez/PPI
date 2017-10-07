@@ -2,18 +2,29 @@ package com.co.business;
 
 import java.util.List;
 
-import com.co.dao.TipoDocumentoDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.zkoss.zk.ui.select.annotation.WireVariable;
+
+import com.co.interfaces.ITipoDocumentoDao;
 import com.co.modelos.TipoDocumento;
 
 import co.com.interfaces.ITipoDocumentoBusiness;
 
+@Service("business")
 public class TipoDocumentoBusiness implements ITipoDocumentoBusiness {
 	
-	private TipoDocumentoDao dao;
-	public void setDao(TipoDocumentoDao dao) 
-    {
+	@Autowired
+	private ITipoDocumentoDao dao;
+
+	public void setDao(ITipoDocumentoDao dao) {
 		this.dao = dao;
-    }
+	}
+	
+	public ITipoDocumentoDao getDao(){
+		return this.dao;
+	}
+	
 	
 	public void save(TipoDocumento t) {
 		try{
@@ -26,7 +37,13 @@ public class TipoDocumentoBusiness implements ITipoDocumentoBusiness {
 
 	public List<TipoDocumento> list() {
 		try{
-			return dao.list();
+			if (dao != null) {
+				return dao.list();
+			} else {
+				System.out.println("---------------------NUUUULLLL Business-----------------");	
+				return null;
+			}
+			
 		}catch(Exception e){
 			throw e;
 		}

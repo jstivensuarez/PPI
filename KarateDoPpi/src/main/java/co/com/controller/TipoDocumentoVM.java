@@ -3,30 +3,39 @@ package co.com.controller;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zk.ui.select.annotation.VariableResolver;
+import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.bind.annotation.BindingParam;
-import org.zkoss.bind.BindUtils;
 
 import java.util.List;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import com.co.business.TipoDocumentoBusiness;
 import com.co.modelos.TipoDocumento;
 
+import co.com.interfaces.ITipoDocumentoBusiness;
+
+@VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
 public class TipoDocumentoVM {
 
 	private String descripcion;
-	private TipoDocumentoBusiness business;
-	private String mensaje;
-	private ListModelList<TipoDocumento> documentos;
-	private ClassPathXmlApplicationContext context;
 
-	public void setBusiness(TipoDocumentoBusiness business) {
+	@WireVariable
+	ITipoDocumentoBusiness business;
+	private String mensaje;
+	
+	private ListModelList<TipoDocumento> documentos;
+
+	public void setBusiness(ITipoDocumentoBusiness business) {
 		this.business = business;
 	}
 
 	public List<TipoDocumento> getDocumentos() {
-		documentos = generateStatusList(business.list());
+		if (business != null) {
+			mensaje = "Not null";
+			documentos = generateStatusList(business.list());
+		} else {
+			mensaje = "Null";
+		}
 		return documentos;
 	}
 
@@ -52,13 +61,14 @@ public class TipoDocumentoVM {
 
 	@Init
 	public void init() {
-		context = new ClassPathXmlApplicationContext("configuration-context.xml");
-		business = (TipoDocumentoBusiness) context.getBean("tipoDocumentoBusiness");
+		// context = new
+		// ClassPathXmlApplicationContext("configuration-context.xml");
+		// business = (TipoDocumentoBusiness)
+		// context.getBean("tipoDocumentoBusiness");
 	}
 
-
 	@Command
-	@NotifyChange({"mensaje","documentos"})
+	@NotifyChange({ "mensaje", "documentos" })
 	public void eliminar(@BindingParam("documento") TipoDocumento t) {
 		try {
 			business.remove(t);
@@ -70,31 +80,31 @@ public class TipoDocumentoVM {
 	}
 
 	@Command
-	@NotifyChange({"mensaje","documentos","descripcion"})
+	@NotifyChange({ "mensaje", "documentos", "descripcion" })
 	public void crear() {
 		try {
-			if(descripcion != null){	
+			if (descripcion != null) {
 				TipoDocumento t = new TipoDocumento(descripcion);
 				business.save(t);
 				mensaje = "Se creó correctamente";
 				descripcion = null;
-			}else{
-				mensaje =  "Por favor agregue una descripción";
+			} else {
+				mensaje = "Por favor agregue una descripción";
 			}
 		} catch (Exception ex) {
 			mensaje = "Error inesperado: " + ex.getMessage() + " " + ex.getCause();
 		}
 	}
-	
-	//Editar
+
+	// Editar
 	@Command
 	@NotifyChange("mensaje")
 	public void confirm(@BindingParam("documento") TipoDocumento t) {
 		business.save(t);
 		cambiarStatus(t);
-		refreshRowTemplate(t);	
+		refreshRowTemplate(t);
 	}
-	
+
 	@Command
 	public void cambiarStatus(@BindingParam("documento") TipoDocumento t) {
 		try {
@@ -104,7 +114,7 @@ public class TipoDocumentoVM {
 			mensaje = ex.getMessage() + "\n" + ex.getCause();
 		}
 	}
-	
+
 	public void refreshRowTemplate(TipoDocumento t) {
 		documentos.set(documentos.indexOf(t), t);
 	}
