@@ -22,7 +22,7 @@ public class TipoDocumentoVM {
 	@WireVariable
 	ITipoDocumentoBusiness business;
 	private String mensaje;
-	
+
 	private ListModelList<TipoDocumento> documentos;
 
 	public void setBusiness(ITipoDocumentoBusiness business) {
@@ -30,12 +30,7 @@ public class TipoDocumentoVM {
 	}
 
 	public List<TipoDocumento> getDocumentos() {
-		if (business != null) {
-			mensaje = "Not null";
-			documentos = generateStatusList(business.list());
-		} else {
-			mensaje = "Null";
-		}
+		documentos = generateStatusList(business.list());
 		return documentos;
 	}
 
