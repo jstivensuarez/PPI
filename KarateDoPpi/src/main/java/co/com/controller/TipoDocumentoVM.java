@@ -22,7 +22,11 @@ public class TipoDocumentoVM {
 	@WireVariable
 	ITipoDocumentoBusiness business;
 	private String mensaje;
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> e3b1ead4a442f152330f4841c098f8657bb15786
 	private ListModelList<TipoDocumento> documentos;
 
 	public void setBusiness(ITipoDocumentoBusiness business) {

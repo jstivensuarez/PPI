@@ -12,5 +12,4 @@ public interface ITipoDocumentoDao {
 	
 	public List<TipoDocumento> list();
 	
-	
 }
