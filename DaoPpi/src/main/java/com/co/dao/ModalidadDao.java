@@ -38,10 +38,15 @@ public class ModalidadDao implements IModalidadDao{
 	}
 	
 	public List<Modalidad> list(){
-		session = sessionFactory.openSession();
-		List<Modalidad> modalidadList = session.createQuery("from Modalidad").list();
-		session.close();
-		return modalidadList;
+		try {
+			session = sessionFactory.openSession();
+			List<Modalidad> modalidadList = session.createQuery("from Modalidad").list();
+			session.close();
+			return modalidadList;
+		} catch (Exception e) {
+			throw e;
+		}
+		
 	}
 	
 	public void remove(Modalidad m) {
