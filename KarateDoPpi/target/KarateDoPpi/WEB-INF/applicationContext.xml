@@ -30,6 +30,7 @@
 			<list>
 				<value>com.co.modelos.TipoDocumento</value>
 				<value>com.co.modelos.Sede</value>
+				<value>com.co.modelos.Usuario</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
