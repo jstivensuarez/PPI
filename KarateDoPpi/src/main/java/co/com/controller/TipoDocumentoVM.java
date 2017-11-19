@@ -28,12 +28,7 @@ public class TipoDocumentoVM {
 	}
 
 	public List<TipoDocumento> getDocumentos() {
-		if (busDoc != null) {
-			mensaje = "Not null";
-			documentos = generateStatusList(busDoc.list());
-		} else {
-			mensaje = "Null";
-		}
+		documentos = generateStatusList(busDoc.list());
 		return documentos;
 	}
 
@@ -101,6 +96,7 @@ public class TipoDocumentoVM {
 		busDoc.save(t);
 		cambiarStatus(t);
 		refreshRowTemplate(t);
+		mensaje = "Se editó correctamente";
 	}
 
 	@Command
