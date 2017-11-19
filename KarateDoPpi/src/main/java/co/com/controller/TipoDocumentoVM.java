@@ -7,11 +7,8 @@ import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.bind.annotation.BindingParam;
-
 import java.util.List;
-
 import com.co.modelos.TipoDocumento;
-
 import co.com.interfaces.ITipoDocumentoBusiness;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
@@ -20,23 +17,20 @@ public class TipoDocumentoVM {
 	private String descripcion;
 
 	@WireVariable
-	ITipoDocumentoBusiness business;
-	private String mensaje;
-<<<<<<< HEAD
+	ITipoDocumentoBusiness busDoc;
 	
-=======
+	private String mensaje;
 
->>>>>>> e3b1ead4a442f152330f4841c098f8657bb15786
 	private ListModelList<TipoDocumento> documentos;
 
 	public void setBusiness(ITipoDocumentoBusiness business) {
-		this.business = business;
+		this.busDoc = business;
 	}
 
 	public List<TipoDocumento> getDocumentos() {
-		if (business != null) {
+		if (busDoc != null) {
 			mensaje = "Not null";
-			documentos = generateStatusList(business.list());
+			documentos = generateStatusList(busDoc.list());
 		} else {
 			mensaje = "Null";
 		}
@@ -75,7 +69,7 @@ public class TipoDocumentoVM {
 	@NotifyChange({ "mensaje", "documentos" })
 	public void eliminar(@BindingParam("documento") TipoDocumento t) {
 		try {
-			business.remove(t);
+			busDoc.remove(t);
 			mensaje = "Se eliminó correctamente";
 			descripcion = "";
 		} catch (Exception ex) {
@@ -89,7 +83,7 @@ public class TipoDocumentoVM {
 		try {
 			if (descripcion != null) {
 				TipoDocumento t = new TipoDocumento(descripcion);
-				business.save(t);
+				busDoc.save(t);
 				mensaje = "Se creó correctamente";
 				descripcion = null;
 			} else {
@@ -104,7 +98,7 @@ public class TipoDocumentoVM {
 	@Command
 	@NotifyChange("mensaje")
 	public void confirm(@BindingParam("documento") TipoDocumento t) {
-		business.save(t);
+		busDoc.save(t);
 		cambiarStatus(t);
 		refreshRowTemplate(t);
 	}
@@ -118,7 +112,7 @@ public class TipoDocumentoVM {
 			mensaje = ex.getMessage() + "\n" + ex.getCause();
 		}
 	}
-
+	
 	public void refreshRowTemplate(TipoDocumento t) {
 		documentos.set(documentos.indexOf(t), t);
 	}

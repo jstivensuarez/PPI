@@ -4,18 +4,24 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.co.interfaces.ISedeDao;
 import com.co.modelos.Sede;
 
-@Repository("Dao")
+@Repository("daoSede")
 public class SedeDao implements ISedeDao {
 
 	private Session session;
 	
+	@Autowired
 	private SessionFactory sessionFactory;
 	
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
 	
 	@Override
 	public void save(Sede s) {
@@ -55,28 +61,12 @@ public class SedeDao implements ISedeDao {
 				System.out.println("------------------HOLA QUE HACE? NULL---------");
 			}
 			session = sessionFactory.openSession();
-			List<Sede> sedeList = session.createQuery("from sede").list();
+			List<Sede> sedeList = session.createQuery("from Sede").list();
 			session.close();
 			return sedeList;
 		} catch (Exception e) {
 			throw e;
 		}
-	}
-
-	public Session getSession() {
-		return session;
-	}
-
-	public void setSession(Session session) {
-		this.session = session;
-	}
-
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
 	}
 	
 }

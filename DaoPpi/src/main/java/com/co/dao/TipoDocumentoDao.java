@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.co.interfaces.ITipoDocumentoDao;
 import com.co.modelos.TipoDocumento;
 
-@Repository("dao")
+@Repository("daoDoc")
 public class TipoDocumentoDao implements ITipoDocumentoDao {
 
 	private Session sesion;
@@ -37,9 +37,6 @@ public class TipoDocumentoDao implements ITipoDocumentoDao {
 
 	public List<TipoDocumento> list() {
 		try {
-			if(sessionFactory == null){
-				System.out.println("---------------------NUUUULLLL-----------------");	
-			}
 			sesion = sessionFactory.openSession();
 			List<TipoDocumento> personList = sesion.createQuery("from TipoDocumento").list();
 			sesion.close();

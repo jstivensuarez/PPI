@@ -16,7 +16,7 @@
 		</div>
 		<separator />
 		<grid id="demoGrid"
-			model="@load(vm.documentos) @template((each.estado) ? 'editable' : 'noneditable')" mold="paging" pageSize="6">
+			model="@load(vm.sedes) @template((each.estado) ? 'editable' : 'noneditable')" mold="paging" pageSize="6">
 			<columns>
 				<column>Sede</column>
 			</columns>

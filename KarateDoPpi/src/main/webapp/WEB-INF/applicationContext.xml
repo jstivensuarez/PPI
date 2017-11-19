@@ -29,6 +29,7 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>com.co.modelos.TipoDocumento</value>
+				<value>com.co.modelos.Sede</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
