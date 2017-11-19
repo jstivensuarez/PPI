@@ -42,12 +42,7 @@ public class SedeVM {
 	}
 
 	public ListModelList<Sede> getSedes() {
-		if (busSed != null) {
-			System.out.print("ERROR: business null");
-			sedes = generateStatusList(busSed.list());
-		} else {
-			mensaje = "Null";
-		}
+		sedes = generateStatusList(busSed.list());		
 		return sedes;
 	}
 
@@ -98,6 +93,7 @@ public class SedeVM {
 		busSed.save(s);
 		cambiarStatus(s);
 		refreshRowTemplate(s);
+		mensaje = "se editó correctamente";
 	}
 
 	@Command
