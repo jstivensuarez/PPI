@@ -7,17 +7,17 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.co.interfaces.IModalidadDao;
-import com.co.modelos.Modalidad;
+import com.co.interfaces.ICinturonDao;
+import com.co.modelos.Cinturon;
 
-@Repository("daoMod")
-public class ModalidadDao implements IModalidadDao{
+@Repository("daoCin")
+public class CinturonDao implements ICinturonDao{
 	
 	private Session session;
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	public ModalidadDao() {
+	public CinturonDao() {
 		
 	}
 	
@@ -25,11 +25,11 @@ public class ModalidadDao implements IModalidadDao{
 		this.sessionFactory = sessionFactory;
 	}
 	
-	public void save(Modalidad m) {
+	public void save(Cinturon c) {
 		try {
 			session = sessionFactory.openSession();
 			session.beginTransaction();
-			session.saveOrUpdate(m);
+			session.saveOrUpdate(c);
 			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
@@ -37,27 +37,27 @@ public class ModalidadDao implements IModalidadDao{
 		}
 	}
 	
-	public List<Modalidad> list(){
+	public List<Cinturon> list(){
 		try {
 			session = sessionFactory.openSession();
-			List<Modalidad> modalidadList = session.createQuery("from Modalidad").list();
+			List<Cinturon> cinturonList = session.createQuery("from Cinturon").list();
 			session.close();
-			return modalidadList;
+			return cinturonList;
 		} catch (Exception e) {
 			throw e;
 		}
-		
 	}
 	
-	public void remove(Modalidad m) {
+	public void remove(Cinturon c) {
 		try {
 			session = sessionFactory.openSession();
 			session.beginTransaction();
-			session.delete(m);
+			session.delete(c);
 			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
 			throw e;
 		}
 	}
+	
 }

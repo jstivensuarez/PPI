@@ -33,6 +33,7 @@
 				<value>com.co.modelos.Rol</value>
 				<value>com.co.modelos.Modalidad</value>
 				<value>com.co.modelos.Usuario</value>
+				<value>com.co.modelos.Cinturon</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
