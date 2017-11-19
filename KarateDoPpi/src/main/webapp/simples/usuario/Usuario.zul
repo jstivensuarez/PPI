@@ -51,6 +51,8 @@
 						<space bar="true" />
 						<button label="Eliminar"
 							onClick="@command('eliminar', usuario=each)" />
+						<button label="Crear"
+							onClick="@command('habilitarPopPupCrear')" />
 					</hbox>
 				</row>
 			</template>

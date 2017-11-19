@@ -19,7 +19,7 @@ public class Sede {
 			"SECUENCIA_SEDE", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SECUENCIA_SEDE") 
 	private int id;
-	private String descripcion;
+	private String nombre;
 	
 	@Transient
 	private boolean estado;
@@ -30,11 +30,11 @@ public class Sede {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getDescripcion() {
-		return descripcion;
+	public String getNombre() {
+		return nombre;
 	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setNombre(String descripcion) {
+		this.nombre = descripcion;
 	}
 		
 	public boolean getEstado() {
@@ -44,7 +44,7 @@ public class Sede {
 		this.estado = estado;
 	}
 	public Sede(String descripcion) {
-		this.descripcion = descripcion;
+		this.nombre = descripcion;
 	}
 	
 	public Sede() {
