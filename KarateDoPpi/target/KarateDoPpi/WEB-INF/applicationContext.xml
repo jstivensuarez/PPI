@@ -34,6 +34,7 @@
 				<value>com.co.modelos.Modalidad</value>
 				<value>com.co.modelos.Usuario</value>
 				<value>com.co.modelos.Cinturon</value>
+				<value>com.co.modelos.Relacion</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
