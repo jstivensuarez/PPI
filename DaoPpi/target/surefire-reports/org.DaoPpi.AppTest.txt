@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: org.DaoPpi.AppTest
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec
+=======
 Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 sec
+>>>>>>> 7276403e5ab8e5978c7840e795a100e1fba90107

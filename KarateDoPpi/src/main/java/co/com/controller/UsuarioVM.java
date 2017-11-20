@@ -1,11 +1,14 @@
 package co.com.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModelList;
@@ -111,6 +114,13 @@ public class UsuarioVM {
 		} catch (Exception ex) {
 			mensaje = ex.getMessage() + "\n" + ex.getCause();
 		}
+	}
+	
+	@Command
+	public void habilitarPopPupCrear() {
+		Map arg = new HashMap();
+		arg.put("someName", "");
+		Executions.getCurrent().createComponents("/simples/usuario/PopPupCrear.zul",null, arg);
 	}
 
 	public void refreshRowTemplate(Usuario s) {
