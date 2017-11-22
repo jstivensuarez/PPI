@@ -1,0 +1,10 @@
+<zk>
+	<window apply="org.zkoss.bind.BindComposer"
+	title="MVVM Modal window Passing arguments and retur values"
+        width="420px" height="auto" border="normal" minimizable="false"
+        mode="modal" maximizable="false" closable="true"
+		viewModel="@id('vm')@init('co.com.controller.UsuarioVM')"
+		validationMessages="@id('vmsgs')" position="center">
+		<label value="Hola mundo"></label>
+	</window>
+</zk>

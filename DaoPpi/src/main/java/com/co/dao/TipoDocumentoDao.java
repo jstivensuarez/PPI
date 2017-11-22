@@ -4,14 +4,17 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.co.interfaces.ITipoDocumentoDao;
 import com.co.modelos.TipoDocumento;
 
+@Repository("daoDoc")
 public class TipoDocumentoDao implements ITipoDocumentoDao {
 
 	private Session sesion;
+	@Autowired
 	private SessionFactory sessionFactory;
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
@@ -21,6 +24,7 @@ public class TipoDocumentoDao implements ITipoDocumentoDao {
 	public void save(TipoDocumento t) {
 
 		try {
+			
 			sesion = sessionFactory.openSession();
 			sesion.beginTransaction();
 			sesion.saveOrUpdate(t);
