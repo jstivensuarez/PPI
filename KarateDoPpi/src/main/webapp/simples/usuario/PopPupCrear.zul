@@ -1,10 +1,22 @@
 <zk>
-	<window apply="org.zkoss.bind.BindComposer"
-	title="MVVM Modal window Passing arguments and retur values"
+	 <window id="modalDialog"
+        title="MVVM Modal window Passing arguments and retur values"
         width="420px" height="auto" border="normal" minimizable="false"
         mode="modal" maximizable="false" closable="true"
-		viewModel="@id('vm')@init('co.com.controller.UsuarioVM')"
-		validationMessages="@id('vmsgs')" position="center">
-		<label value="Hola mundo"></label>
+        action="hide: slideUp" apply="org.zkoss.bind.BindComposer"
+        onCancel="@command('closeThis')"
+        viewModel="@id('vm') @init('co.com.controller.PopPup')">
+
+		<div>
+
+			<label value="Nombre" width="150px" />
+			<textbox value="@bind(vm.nombre)" width="150px"
+				tabindex="1" />
+			<label value="Correo" width="150px" />
+			<textbox value="@bind(vm.correo)" width="150px"
+				tabindex="1" />
+			<button label="Crear" onClick="@command('close')"
+				width="100px" height="30px" />
+		</div>
 	</window>
 </zk>
