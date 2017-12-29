@@ -1,0 +1,36 @@
+<zk>
+	<window apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('co.com.controller.AlumnoVM')"
+		validationMessages="@id('vmsgs')" position="center">
+
+		<separator />
+
+		<grid id="demoGrid"
+			model="@load(vm.alumnos) @template((each.estado) ? 'editable' : 'datos')" mold="paging" pageSize="6" >			
+			<columns>
+				<column>Alumno</column>
+			</columns>
+			<template name="datos">
+				<row>
+					<label value="@load(each.documento)" />
+					<label value="@load(each.nombre)" />
+					<label value="@load(each.primer_apellido)" />
+					<label value="@load(each.segundo_apellido)" />
+					<label value="@load(each.correo)" />
+					<label value="@load(each.telefono)" />
+					<label value="@load(each.direccion)" />
+					<label value="@load(each.cinturon_id)" />
+					<label value="@load(each.tipo_documentos_id)" />
+					<label value="@load(each.fecha_nacimiento)" />
+					<label value="@load(each.sede)" />
+				</row>
+				
+				
+			</template>
+
+		</grid>
+		<div style="display-top:10px">
+			<label value="@load(vm.mensaje)" />
+		</div>
+	</window>
+</zk>
