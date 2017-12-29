@@ -1,22 +1,9 @@
-<zk>
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<style src="/css/bootstrap.css" />
+	<script src="/js/bootstrap.js" />
 	<window apply="org.zkoss.bind.BindComposer"
 		viewModel="@id('vm')@init('co.com.controller.UsuarioVM')"
 		validationMessages="@id('vmsgs')" position="center">
-
-		<separator />
-
-		<div>
-
-			<label value="Nombre" width="150px" />
-			<textbox value="@bind(vm.nombre)" width="150px"
-				tabindex="1" />
-			<label value="Correo" width="150px" />
-			<textbox value="@bind(vm.correo)" width="150px"
-				tabindex="1" />
-			<button label="Crear" onClick="@command('crear')"
-				width="100px" height="30px" />
-		</div>
-		<separator />
 		<grid id="demoGrid"
 			model="@load(vm.usuarios) @template((each.estado) ? 'editable' : 'noneditable')"
 			mold="paging" pageSize="6">
@@ -50,15 +37,90 @@
 							onClick="@command('cambiarStatus', usuario=each)" />
 						<space bar="true" />
 						<button label="Eliminar"
-							onClick="@command('eliminar', usuario=each)" />
-						<button label="Crear"
-							onClick="@command('habilitarPopPupCrear')" />
+							onClick="@command('mostrarPopUpEliminar', usuario=each)" />
 					</hbox>
 				</row>
 			</template>
+
 		</grid>
+		<button label="Crear" onClick="@command('mostrarPopUpCrear')" />
 		<div style="display-top:10px">
 			<label value="@load(vm.mensaje)" />
 		</div>
+
+		<div>
+			<window title="Crear usuario" width="420px" height="auto"
+				border="normal" mode="modal" action="hide: slideUp" sizable="false"
+				visible="@load(vm.popUpCrear)">
+
+				<div>
+
+					<label value="Nombre" width="150px" />
+					<textbox value="@bind(vm.nombre)" width="150px"
+						tabindex="1" />
+					<label value="Correo" width="150px" />
+					<textbox value="@bind(vm.correo)" width="150px"
+						tabindex="1" />
+					<h:br />
+					<h:br />
+					<h:h4>Asignar Roles</h:h4>
+					<listbox mold="paging" pageSize="5" multiple="true"
+						model="@load(vm.roles)">
+						<listhead>
+							<listheader label=""></listheader>
+							<listheader label=""></listheader>
+						</listhead>
+						<template name="model" var="each">
+							<listitem >
+								<listcell>
+									<checkbox
+										label="@load(each.descripcion)" onCheck="@bind(each.estado)"
+										value="@load(each.id)" />
+								</listcell>
+							</listitem>
+						</template>
+					</listbox>
+					<h:br />
+					<h:br />
+					<div>
+						<button label="Crear"
+							onClick="@command('crear')" width="100px" height="30px" />
+						<button label="Cancelar"
+							onClick="@command('mostrarPopUpCrear')" width="100px"
+							height="30px" />
+
+					</div>
+				</div>
+
+
+			</window>
+		</div>
+
+		<div>
+			<window title="Eliminar usuario" width="450px" height="auto"
+				border="normal" mode="modal" action="hide: slideUp" sizable="false"
+				visible="@load(vm.popUpEliminar)">
+
+				<div>
+					<h:h4>¿Está seguro de eliminar este registro?</h:h4>
+					Nombre
+					<label value="@load(vm.user.nombre)" width="150px" />
+					<h:br />
+					Correo
+					<label value="@load(vm.user.correo)" width="150px" />
+					<h:br />
+					<h:br />
+					<div>
+						<button label="Eliminar"
+							onClick="@command('eliminar')" width="100px" height="30px" />
+						<button label="Cancelar"
+							onClick="@command('mostrarPopUpEliminar')" width="100px"
+							height="30px" />
+					</div>
+				</div>
+			</window>
+		</div>
 	</window>
+
+
 </zk>

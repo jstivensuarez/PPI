@@ -39,4 +39,15 @@ public class AlumnoBusiness implements IAlumnoBusiness{
 			throw e;
 		}
 	}
+		
+	public String descripcionSede(int idAlumno) {
+		String descripcion;
+		try {
+			descripcion = daoAlu.descripcionSede(idAlumno);
+			return descripcion;
+		} catch (Exception e) {
+			throw e;
+		}
+		
+	}
 }

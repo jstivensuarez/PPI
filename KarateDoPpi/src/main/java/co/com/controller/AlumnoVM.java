@@ -114,17 +114,7 @@ public class AlumnoVM {
 		List<Alumno> alums = busAlu.list();
 		List<Sede> seds = busSed.list();
 		for (Alumno alumno : alums) {
-			alumno.setSede("a");
-			for (Sede sede : seds) {
-				if(alumno.getSede_id() == sede.getId()) {
-					cont = 1;
-				}
-				if(cont == 1) {
-					alumno.setSede(sede.getNombre());
-					cont = 0;
-				}
-			}
-			
+			alumno.setSede(busAlu.descripcionSede(alumno.getSede_id()));			
 		}
 		alumnos = generateStatusList(alums);
 		sedes = generateStatusListSede(busSed.list());

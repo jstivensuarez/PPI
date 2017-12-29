@@ -49,12 +49,12 @@ public class AlumnoDao implements IAlumnoDao{
 		}
 	}
 	
-	//public String descripcionSede(int id) {
-		//session = sessionFactory.openSession();
-		//String descripcion = (String) session.createQuery("select " + id + " from Sede").uniqueResult();
-		//session.close();
-		//return descripcion;
-	//}
+	public String descripcionSede(int id) {
+		session = sessionFactory.openSession();
+		String descripcion = (String) session.createQuery("select " + id + " from Sede").uniqueResult();
+		session.close();
+		return descripcion;
+	}
 	
 	public void remove(Alumno a) {
 		try {

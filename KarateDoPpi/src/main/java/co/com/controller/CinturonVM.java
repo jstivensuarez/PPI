@@ -38,7 +38,7 @@ public class CinturonVM {
 	@NotifyChange({"mensaje", "cinturones"})	
 	public void eliminar(@BindingParam("cinturon") Cinturon c) {
 		try {
-			busCin.remove(c);;
+			busCin.remove(c);
 			mensaje = "Se eliminó correctamente";
 			descripcion = "";
 		} catch (Exception ex) {

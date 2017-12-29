@@ -11,4 +11,6 @@ public interface IAlumnoDao {
 	public void remove(Alumno a);
 	
 	public List<Alumno> list();
+	
+	public String descripcionSede(int idAlumno);
 }

@@ -11,4 +11,6 @@ public interface IAlumnoBusiness {
 	public List<Alumno> list();
 		
 	public void remove(Alumno a);
+	
+	public String descripcionSede(int idAlumno);
 }
